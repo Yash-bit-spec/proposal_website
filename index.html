@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Proposal</title>
+    <style>
+        body {
+            background-image: url('teddy_bear_background.jpg'); /* Add your teddy bear background image here */
+            background-size: cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 20%;
+        }
+        .falling-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('heart_emoji.png') no-repeat center center;
+            background-size: cover;
+            animation: fall 5s infinite;
+        }
+        @keyframes fall {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you go on a date with me?</h1>
+        <button id="yesButton">Yes</button>
+        <button id="noButton">No</button>
+    </div>
+    <div class="falling-hearts" id="heartsContainer"></div>
+    <audio id="loveSong" src="a_thousand_years.mp3"></audio> <!-- Add your song file here -->
+
+    <script>
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const heartsContainer = document.getElementById('heartsContainer');
+        const loveSong = document.getElementById('loveSong');
+
+        yesButton.addEventListener('click', () => {
+            document.body.innerHTML = "<h1>I love you, Anushka!</h1><p>Roses are red, Violets are blue, My heart is full of love, Just for you.</p>";
+            loveSong.play();
+            createHearts();
+        });
+
+        noButton.addEventListener('click', () => {
+            document.body.innerHTML = "<h1>Are you sure? Please click Yes!</h1><button id='yesButton'>Yes</button>";
+            document.getElementById('yesButton').addEventListener('click', () => {
+                document.body.innerHTML = "<h1>I love you, Anushka!</h1><p>Roses are red, Violets are blue, My heart is full of love, Just for you.</p>";
+                loveSong.play();
+                createHearts();
+            });
+        });
+
+        function createHearts() {
+            for (let i = 0; i < 100; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+  </html>
 
